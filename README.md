@@ -38,7 +38,9 @@ En el código, este comportamiento se implementa en el método `dividir(Nodo nod
 
 ## 8. Explicación de la convención de promoción usada en la práctica
 
+Cuando un nodo alcanza cuatro llaves, se divide en dos nodos y se promueve la tercera llave al nodo padre. Por ejemplo, si las llaves son `10, 20, 30, 40`, se promueve `30`; las llaves `10, 20` quedan en el nodo izquierdo y `40` en el nodo derecho.
 
+Si el nodo que se divide es la raíz, la llave promovida se convierte en la nueva raíz. Si no es la raíz, la llave se agrega al padre y, si este también alcanza cuatro llaves, se vuelve a dividir.
 
 ## 9. Explicación breve de redistribución y fusión
 

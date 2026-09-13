@@ -15,9 +15,49 @@ java Practica2
 
 ## 4. Explicación breve de la representación de un nodo
 
+Un nodo es un elemento del árbol que almacena llaves ordenadas y, cuando es interno, referencias a sus hijos.
+
+- Un nodo puede tener como máximo `m` hijos y `m - 1` llaves.
+- Un nodo interno con `r` llaves tiene exactamente `r + 1` hijos.
+- Un nodo hoja no tiene hijos, solo llaves.
+
+En el código, cada nodo se representa con:
+
+- `ArrayList<Integer> llaves`: las llaves ordenadas del nodo.
+- `ArrayList<Nodo> hijos`: las referencias a sus hijos (vacía si es hoja).
+- `Nodo padre`: referencia al nodo padre (útil para la reparación).
+- `boolean esHoja`: indica si el nodo es hoja o interno.
+- 
 ## 5. Explicación de qué significa m = 4 y por qué cada nodo admite máximo tres llaves
 
+`m` es el orden del árbol B: ningún nodo puede tener más de `m` hijos ni más de `m - 1` llaves. En esta práctica `m = 4`, por lo tanto:
+
+- Máximo de hijos por nodo: `m = 4`.
+- Máximo de llaves por nodo: `m - 1 = 3`.
+- Mínimo de llaves en nodos distintos de la raíz: `q = ⌊m/2⌋ - 1 = 1`.
+
+Esto no significa que todo nodo tenga 4 hijos y 3 llaves: es solo el límite. Un nodo interno con `r` llaves tiene `r + 1` hijos, y una hoja tiene 0 hijos.
+
 ## 6. Explicación de cómo se decide qué hijo seguir durante una búsqueda
+
+En cada nodo se comparan las llaves en orden para encontrar la primera posición `i` tal que `x <= llaves[i]`. Con esa posición se decide:
+
+1. Si `llaves[i] == x`, la llave está en el nodo actual y la búsqueda termina con éxito.
+2. Si `x < llaves[i]`, entonces `x` pertenece al intervalo anterior a `llaves[i]` y se baja por `hijos[i]`.
+3. Si `x` es mayor que todas las llaves del nodo, se baja por el último hijo, `hijos[r]` (donde `r` es el número de llaves).
+4. Si el nodo es hoja y no se encontró la llave, se regresa `NOT_FOUND`.
+
+Ejemplo: si el nodo es `[15 | 30 | 60]` y buscamos `45`, el primer índice con `45 <= llaves[i]` es `i = 2` (porque `45 < 60`), así que se baja por `hijos[2]`, es decir, el hijo entre 30 y 60.
+
+En el código, esto se implementa en `buscarNodo` con el bucle:
+
+```java
+int i = 0;
+while (i < nodo.llaves.size() && llave > nodo.llaves.get(i)) {
+    i++;
+}
+nodo = nodo.hijos.get(i);
+```
 
 ## 7. Explicación de qué ocurre cuando un nodo alcanza cuatro llaves
 

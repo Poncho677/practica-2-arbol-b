@@ -228,6 +228,26 @@ public class ArbolB {
         reparar(padre);
     }
 
+    public String imprimirPorNiveles(){
+	String s = "";
+	int i = 0;
+	ArrayList<Nodo> nivel = new ArrayList<>();
+	nivel.add(raiz);
+	while(!nivel.isEmpty()){
+	    ArrayList<Nodo> siguiente = new ArrayList<>();
+	    s += "Nivel " + String.valueOf(i) + ": ";
+	    for(Nodo t: nivel){
+		if(!t.hijos.isEmpty())
+		    siguiente.addAll(t.hijos);
+		s += t.toString() + "  ";
+	    }
+	    s += "\n";
+	    nivel = siguiente;
+	    i++;
+	}
+	return s;
+    }
+
     @Override
     public String toString() {
         String texto = "";

@@ -4,3 +4,11 @@
 * Cruz Escobar Aarón
 * Góngora Barroso Alfonso
 * Quirino Roman Emmanuel
+## Lenguaje utilizado 
+Java
+## Instrucciones para ejecutar el programa
+
+```bash
+javac *.java
+java Practica2
+```

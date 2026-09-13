@@ -44,6 +44,8 @@ Si el nodo que se divide es la raíz, la llave promovida se convierte en la nuev
 
 ## 9. Explicación breve de redistribución y fusión
 
+### Redistribución
+
 Si un hermano adyacente (primero el izquierdo, luego el derecho, según las convenciones de desempate) tiene más de una llave (es decir, más que el mínimo `q = 1`), puede ceder una llave. El movimiento no es directo entre hermanos, sino que pasa por el padre:
 
 1. Una llave del hermano sube al padre, ocupando el lugar del separador.

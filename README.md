@@ -13,6 +13,81 @@ java Practica2
 ```
 ## 3. Instrucciones para ejecutar los casos de prueba
 
+Al ejecutar la clase `Practica2.java`, el `main` crea una instancia de
+`ArbolB` y ejecuta, en orden, los siguientes casos:
+ 
+1. Imprime un árbol vacío:
+```
+   [ ]
+```
+2. Inserta 10, 20, 40 e imprime el árbol:
+```
+   [10, 20, 40]
+```
+3. Inserta 30. Esto provoca un desbordamiento: el nodo se divide, la raíz
+   se queda con la llave `30` y sus hijos son `[10, 20]` y `[40]`:
+```
+   [30]
+   [10, 20] [40]
+```
+4. Sigue insertando 50, 60, 70, 80, 90, 100 (imprimiendo el árbol después
+   de cada inserción), hasta llegar a:
+```
+   [60]
+   [10, 30] [90]
+   [1, 2] [20] [40, 50] [70, 80] [100]
+```
+5. Busca `20` → imprime `llave -> 20`.
+6. Busca `1` (no pertenece al árbol) → imprime `NOT_FOUND`.
+7. Imprime el árbol por niveles con `imprimirPorNiveles()`:
+```
+   Nivel 0: [60]
+   Nivel 1: [10, 30]  [90]
+   Nivel 2: [1, 2]  [20]  [40, 50]  [70, 80]  [100]
+```
+8. Elimina `20`. Como `20` estaba en una hoja y su hermano tenía más de
+   `q = ⌊m/2⌋ - 1 = 1` llave, le presta una (`2`) a través del padre; el
+   `10` original en el padre pasa a la hoja subocupada y el árbol queda:
+```
+   [60]
+   [2, 30] [90]
+   [1] [10] [40, 50] [70, 80] [100]
+```
+9. Elimina `10`: como su hoja queda subocupada y el hermano tampoco tiene
+   de sobra en ese caso, se repite una redistribución/fusión análoga.
+   Luego elimina `40`, que sí requiere una fusión real de dos hermanos:
+```
+   Eliminando 10
+   [60]
+   [2, 40] [90]
+   [1] [30] [50] [70, 80] [100]
+ 
+   Eliminando 40
+   [60]
+   [2] [90]
+   [1] [30, 50] [70, 80] [100]
+```
+10. Elimina `50`: su hoja tiene más de una llave, así que simplemente se
+    quita `50` de la lista sin necesitar reparación:
+```
+    [60]
+    [2] [90]
+    [1] [30] [70, 80] [100]
+```
+11. Elimina `60`, que es la llave de la raíz. La raíz termina vacía y se
+    reemplaza por el resultado de la reparación, reduciendo la altura del
+    árbol:
+```
+    [2, 70, 90]
+    [1] [30] [80] [100]
+```
+12. Busca `20` → `NOT_FOUND`. Busca `70` → `llave -> 70`.
+13. Imprime por niveles el resultado final:
+```
+    Nivel 0: [2, 70, 90]
+    Nivel 1: [1]  [30]  [80]  [100]
+```
+
 ## 4. Explicación breve de la representación de un nodo
 
 Un nodo es un elemento del árbol que almacena llaves ordenadas y, cuando es interno, referencias a sus hijos.

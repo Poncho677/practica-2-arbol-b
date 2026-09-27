@@ -185,3 +185,11 @@ Si la raíz queda vacía y tiene un único hijo, ese hijo se convierte en la nue
 En el código, la fusión se implementa en el método `fusionar(Nodo padre, int i)`, y la propagación se maneja al final de `reparar` con la llamada recursiva `reparar(padre)`.
 
 ## 10. Respuesta a las preguntas marcadas en esta guía
+
+### ¿Por qué al insertar una llave nueva no podemos decidir el hijo únicamente comparando con la primera llave del nodo?
+
+Porque un nodo puede guardar hasta 3 llaves, lo que genera hasta 4 caminos posibles. Si solo se compara la nueva llave con el primer número del nodo, únicamente se sabrá si es menor y debe ir al primer camino. Si resulta ser mayor, no hay forma de saber por cuál de los otros tres caminos ir sin revisar las demás llaves del nodo.
+
+### ¿Por qué una búsqueda no debe recorrer todos los hijos de un nodo?
+
+Porque los números dentro de cada nodo ya están ordenados y funcionan de tal forma que señalan la dirección exacta. Al comparar el número que se busca contra el nodo, se sabe con seguridad por cuál único hijo bajar. Revisar los demás caminos es innecesario porque, gracias al orden de la estructura, ya se sabe que ahí no va a estar.
